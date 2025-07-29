@@ -1,0 +1,28 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html>
+<head><title>Frontend</title></head>
+<body>
+  <h1>Enter your name</h1>
+  <form onsubmit="submitForm(event)">
+    <input id="name" placeholder="Enter name" required />
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    async function submitForm(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+
+      await fetch("http://<BACKEND_PRIVATE_IP>:5000/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name })
+      });
+
+      alert("Submitted to backend!");
+    }
+  </script>
+</body>
+</html>
+
